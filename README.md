@@ -1,0 +1,1 @@
+This project is used to be a demo project for using spring ai's RAG capabilities.
