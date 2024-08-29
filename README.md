@@ -5,3 +5,10 @@ Also chatClient is being used instead of chatModel to provide a level of abstrac
 The current project uses llama3.1 running locally on ollama.
 
 The Spring AI while writing this code was still in milestone version 1.0.0-M2. No public release version was available at the time.
+
+To build the project: `./mvnw clean install`
+
+Pending:
+1. Function calling external data sources
+2. RAG
+3. Dockerization of entire project including ollama
