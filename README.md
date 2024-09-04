@@ -10,6 +10,6 @@ To build the project: `./mvnw clean install`
 
 Pending:  
 1. RAG - code written but output is garbage even with postgres and chromadb using ollama llama3.1 embedding
-2. Function calling external data sources  ---- get from here https://en.wikipedia.org/w/api.php?action=help&modules=opensearch eg. https://en.wikipedia.org/w/api.php?action=opensearch&profile=classic&search=pokemon   
+2. Function calling external data sources  ---- imported jsoup to decode html response 
 3. Write evaluation testing `https://docs.spring.io/spring-ai/reference/api/testing.html`
 4. Dockerization of entire project including ollama

@@ -27,13 +27,13 @@ public class TextReaderController {
     @Value("classpath:dataset.txt")
     private Resource textResource;
 
-    @PostConstruct
-    public void init() {
-        TextReader textReader = new TextReader(textResource);
-        textReader.getCustomMetadata().put("filename", "dataset.txt");
-        TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
-        vectorStore.accept(tokenTextSplitter.apply(textReader.get()));
-    }
+    // @PostConstruct
+    // public void init() {
+    //     TextReader textReader = new TextReader(textResource);
+    //     textReader.getCustomMetadata().put("filename", "dataset.txt");
+    //     TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
+    //     vectorStore.accept(tokenTextSplitter.apply(textReader.get()));
+    // }
 
     @GetMapping("/chat-with-text")
     public String chatWithText(
