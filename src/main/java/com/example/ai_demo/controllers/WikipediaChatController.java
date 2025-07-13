@@ -1,49 +1,38 @@
 package com.example.ai_demo.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestClient;
+
+import com.example.ai_demo.services.WikipediaService;
+import com.example.ai_demo.tools.WikiTools;
 import com.fasterxml.jackson.databind.JsonNode;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.ArrayList;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @Slf4j
+@RequiredArgsConstructor
 public class WikipediaChatController {
 
-    private final RestClient restClient = RestClient
-            .create("https://en.wikipedia.org/w");
+    private final WikipediaService wikipediaService;
+    private final ChatClient textClient;
+    // private final WikiTools wikiTools;
 
     @GetMapping("/wiki-lookup")
     public JsonNode getMethodName(@RequestParam String param) {
-        log.info("Received request for {}", param);
-        JsonNode response = restClient.get()
-                .uri("/api.php?action=opensearch&format=json&profile=classic&search={param}", param)
-                .retrieve()
-                .body(JsonNode.class);
+        return wikipediaService.getInfoFromWiki(param);
+    }
 
-        log.info("Received response: {}", response);
-        String correctUrl = response.get(3).get(0).asText();
-        log.info("correct url is {}", correctUrl);
-
-        try {
-            Document doc = Jsoup.connect(correctUrl).get();
-            String paragraph = doc.select("p").text();
-            log.info(paragraph);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return null;
+    @GetMapping("/wiki-chat-bot")
+    public String generate(
+            @RequestParam(value = "message", defaultValue = "what is \"internet\"?") String message) {
+        return textClient.prompt(message)
+                .tools(new WikiTools(wikipediaService))
+                .call()
+                .content();
     }
 }
