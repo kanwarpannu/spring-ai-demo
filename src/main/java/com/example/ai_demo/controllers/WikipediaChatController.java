@@ -34,24 +34,16 @@ public class WikipediaChatController {
 
         log.info("Received response: {}", response);
         String correctUrl = response.get(3).get(0).asText();
+        log.info("correct url is {}", correctUrl);
 
         try {
             Document doc = Jsoup.connect(correctUrl).get();
-            List<Element> elementList = new ArrayList<>();
-            elementList = doc.select("p").stream().collect(Collectors.toList());
+            String paragraph = doc.select("p").text();
+            log.info(paragraph);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
-
-
-        String trueResponse = RestClient.create(correctUrl)
-                .get()
-                .retrieve()
-                .body(String.class);
-
-        return response;
+        return null;
     }
-
 }
