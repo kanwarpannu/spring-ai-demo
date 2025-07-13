@@ -13,6 +13,9 @@ public class ChatClientConfig {
     @Value("${default-system-voice}")
     private String defaultSystemPrompt;
 
+    @Value("${default-text-reader-voice}")
+    private String defaultTextReaderPrompt;
+
     @Bean
     ChatClient chatClient(ChatClient.Builder builder) {
         InMemoryChatMemory chatMemory = new InMemoryChatMemory();
@@ -30,7 +33,7 @@ public class ChatClientConfig {
     @Bean
     ChatClient textClient(ChatClient.Builder builder) {
         return builder
-                .defaultSystem(defaultSystemPrompt)
+                .defaultSystem(defaultTextReaderPrompt)
                 .build();
     }
 }
