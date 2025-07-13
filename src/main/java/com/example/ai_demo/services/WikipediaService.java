@@ -37,7 +37,7 @@ public class WikipediaService {
         try {
             Document doc = Jsoup.connect(correctUrl).get();
             paragraph = doc.select("p").text();
-            log.info(paragraph);
+            log.info(paragraph.translateEscapes().substring(0, 1000));
             return objectMapper.createObjectNode().put("response", paragraph.translateEscapes());
         } catch (IOException e) {
             e.printStackTrace();
