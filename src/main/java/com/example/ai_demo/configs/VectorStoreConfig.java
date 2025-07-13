@@ -11,7 +11,7 @@ public class VectorStoreConfig {
 
     @Bean
     VectorStore vectorStore(EmbeddingModel embeddingModel) {
-        return new SimpleVectorStore(embeddingModel);
+        return SimpleVectorStore.builder(embeddingModel).build();
     }
 
 }
