@@ -17,4 +17,4 @@ To build the project: `./mvnw clean install -DskipTests` --(Tests need locally r
 # Run it
 `docker run -d --name spring-ollama -p 8080:8080 -p 11434:11434 spring-ollama:latest`
 
-The Docker run command above can be modified according to local gpu, the above command uses CPU only for max compatibility. For more info try [https://hub.docker.com/r/ollama/ollama](Docker hub page for ollama)
+The Docker run command above can be modified according to local gpu, the above command uses CPU only for max compatibility. For more info try [Docker hub page for ollama](https://hub.docker.com/r/ollama/ollama)
