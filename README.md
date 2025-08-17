@@ -9,7 +9,12 @@ The project exposes swagger endpoint on [http://localhost:8080/swagger-ui/index.
 2. TextReaderController for basic RAG capability(It uses GNU license in resources as input and in-memory vector store)
 3. WikiController which uses wikipedia for information retrival
 
-To build the project: `./mvnw clean install`
+To build the project: `./mvnw clean install -DskipTests` --(Tests need locally running ollama that's why its skipped in this demo)
 
-Pending:  
-1. Dockerization of entire project including ollama
+# Build the image
+`docker build -t spring-ollama:latest .`
+
+# Run it
+`docker run -d --name spring-ollama -p 8080:8080 -p 11434:11434 spring-ollama:latest`
+
+The Docker run command above can be modified according to local gpu, the above command uses CPU only for max compatibility. For more info try [https://hub.docker.com/r/ollama/ollama](Docker hub page for ollama)
